@@ -1,0 +1,196 @@
+<html>
+
+<head>
+    <link type="text/css" rel="stylesheet" href="/style-guide/css/fluig-style-guide.min.css" />
+    <script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+    <script type="text/javascript" src="/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="main.js"></script>
+</head>
+
+<body>
+    <div class="fluig-style-guide">
+        <form name="form" role="form">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fluigicon fluigicon-user icon-md"></i>DADOS SOLICITANTES</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="solicitante">Solicitante</label>
+                            <input type="text" name="solicitante" id="solicitante " class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="dtSolicitacao">Data da Solicitação</label>
+                            <input type="text" name="dtSolicitacao" id="dtSolicitacao" class="form-control" mask="00/00/0000">
+                        </div>
+
+                        <div class="col-md-8">
+                            <label for="email">E-mail</label>
+                            <input type="text" name="email" id="email" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="telefone">Telefone</label>
+                            <input type="text" name="telefone" id="telefone" class="form-control">
+                        </div>
+
+                        <div class="col-md-8">
+                            <label for="setor">Setor</label>
+                            <input type="text" name="setor" id="setor" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="justifSolicitante">Justificação Solicitante</label>
+                            <textarea type="textarea" name="justifSolicitante" class="form-control" rows="5"></textarea>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label for="tp_produto">Tipo de Produto</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="tp_produto" value="produtoAcabado">Produto Acabado</label>
+                                <label>
+                                    <input type="radio" name="tp_produto" value="MateriaPrima">Materia Prima</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                	<h3 class="panel-title"><i class="fluigicon fluigicon-user icon-md"></i>PRODUTOS</h3>
+                 </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+
+                            <table tablename="tb_produtos" class="table table-hover" noaddbutton=true nodeletebutton=true>
+                                <thead>
+                                    <tr>
+                                        <td></td>
+                                        <td><b>Descrição :</b></td>
+                                        <td><b>Quantidade :</b></td>
+                                        <td><b>Valor Unit :</b></td>
+                                        <td><b>Valor Total :</b></td>
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <td>
+                                        <div onclick="fnWdkRemoveChild(this)"><span class="fluigicon fluigicon-trash fluigicon-md botao_remove"></span></div>
+                                    </td>
+                                    <td>
+                                        <input type="zoom" id="produto" name="produto" data-zoom="{
+	       'displayKey':'groupId',
+	       'datasetId':'colleagueGroup',
+	       'maximumSelectionLength':'2',
+	       'placeholder':'Escolha o produto',
+	       'fields':[
+	           {
+	              'field':'colleagueId',
+	              'label':'ID'
+	           },{
+	             'field':'groupId',
+	             'label':'Nome',
+	             'standard':'true'
+	           }
+	       ]
+	    }" />
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" id="quantidade_prod" name="quantidade_prod">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" id="valUnit_prod" onblur="calcula(this.id)" name="valUnit_prod">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" id="valTotal_prod" name="valTotal_prod">
+                                    </td>
+                                </tr>
+                            </table>
+                            <button class="btn btn-primary" id="add_tb_produtos" onclick="wdkAddChild('tb_produtos')">Novo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+
+    <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fluigicon fluigicon-user icon-md"></i>APROVAÇÕES</h3>
+                </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="desc_gestor">Descrição Gestor: </label>
+                <textarea class="form-control" name="desc_gestor" id="desc_gestor" rows="5"></textarea>
+            </div>
+
+            <div class="form-group col-md-4" style="padding-top: 25px;">
+                <label for="aprov_gestor">Aprovação do Gestor</label>
+                <table>
+                    <tr>
+                        <td>Sim</td>
+                        <td style="padding-left: 10px;">
+                            <input type="radio" value="Sim" name="aprov_gestor" id="aprov_gestor_sim">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Não
+                        </td>
+                        <td style="padding-left: 10px;">
+                            <input type="radio" name="aprov_gestor" value="Nao" id="aprov_gestor_nao">
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="desc_financ">Descrição Financeiro: </label>
+                <textarea class="form-control" name="desc_financ" id="desc_financ" rows="5"></textarea>
+            </div>
+
+            <div class="form-group col-md-4" style="padding-top: 25px;">
+                <label for="aprov_financ">Aprovação do Financeiro</label>
+                <table>
+                    <tr>
+                        <td>Sim</td>
+                        <td style="padding-left: 10px;">
+                            <input type="radio" value="Sim" name="aprov_financ" id="aprov_financ_sim">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Não
+                        </td>
+                        <td style="padding-left: 10px;">
+                            <input type="radio" name="aprov_financ" value="Nao" id="aprov_financ_nao">
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+        </div>
+        </div>
+        
+        <script type="text/javascript" src="main.js"></script>
+        
+        </form>
+    </div>
+</body>
+
+</html>

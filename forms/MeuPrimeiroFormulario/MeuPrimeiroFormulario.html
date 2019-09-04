@@ -1,0 +1,211 @@
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="/style-guide/css/fluig-style-guide.min.css"/>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="fluig-style-guide">
+<form name="form" role="form">
+
+<div class="panel panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fluigicon fluigicon-user icon-sm"></i>Dados Solicitante</h3>
+    </div>
+    <div class="panel-body">
+        <!-- DADOS SOLICITANTE -->
+		<div class="row">
+			<div class="col-md-6">
+				<label for="nome"> Nome</label>
+					<input type="text" name="nome" id="nome" class="form-control">
+			</div>
+		<div class="col-md-6">
+			<label for="matricula">Matricula</label>
+			<input type="text" name="matricula" id="matricula" class="form-control">
+		</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12 col-sm-6">
+				<label for="endereco">Endereço</label>
+				<input type="text" name="endereco" id="endereco" class="form-control">
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-6">
+			<label for="cep">CEP</label>
+			<input type="text" name="cep" id="cep" class="form-control">
+		</div>
+			
+		<div class="col-md-6">
+			<label for="cidade">Cidade</label>
+			<input type="text" name="cidade" id="cidade" class="form-control">
+		</div>	
+		</div>
+		
+		<div class="row">
+		<div class="col-md-4">
+			<label for="setor">Setor</label>
+			<select type="text" name="setor" id="setor" class="form-control" dataset="ds_datasetAtonanni" datasetKey="setor" datasetValue="setor">
+			</select>
+			</div>
+		</div>
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Dados Gestor</h3>
+    </div>
+    <div class="panel-body">
+        <!-- DADOS GESTOR -->
+	<!-- CAMPO ZOOM COM CONEXÃO NO DATASET COLLEAGUE -->
+	
+	<div class="row">
+		<div class="col-md-12">
+		<label for="gestor">Selecione seu Gestor</label>
+		<input
+	    type="zoom"
+	    id = "gestor"
+	    name="gestor"
+	    data-zoom="{
+	        'displayKey':'colleagueName',
+	        'datasetId':'colleague',
+	        'maximumSelectionLength':'1',
+	        'placeholder':'Escolha o usuário',
+	        'fields':[
+	            {
+	               'field':'colleagueId',
+	               'label':'ID'
+	            },{
+	              'field':'colleagueName',
+	              'label':'Nome',
+	              'standard':'true'
+	            },{
+	              'field':'login',
+	              'label':'Login'
+	            }
+	        ]
+	     }"
+	/>
+		</div>
+	</div>
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Dados Viagem</h3>
+    </div>
+    <div class="panel-body">
+        <!-- DADOS VIAGEM -->
+	<!-- CAMPO PAI E FILHO COM DADOS DA PASSAGEM = EMPRESA DE AVIAÇÃO, ORIGEM , DESTINO, FINALIDADE -->
+	
+	<div class="row">
+		<div class="col-md-12">
+			<label for="info_passagens"> Informações de Passagens</label>
+			 <table tablename="info_passagens" class="table table-hover" addbuttonlabel="Novo" addbuttonclass="btn btn-primary btn-sm">
+			 <thead>
+			    <tr>
+				     <td>Empresa de Aviação</td>
+				     <td>Origem</td>
+				     <td>Destino</td>
+				     <td>Finalidade</td>
+			    </tr>
+			 </thead>
+			 	<tr>
+			 		<td>
+                            <input
+							    type="zoom"
+							    id = "avicao_empresa"
+							    name="avicao_empresa"
+							    data-zoom="{
+							        'displayKey':'groupId',
+							        'datasetId':'colleagueGroup',
+							        'maximumSelectionLength':'2',
+							        'placeholder':'Escolha o usuário',
+							        'fields':[
+							            {
+							               'field':'colleagueId',
+							               'label':'Empresa'
+							            },{
+							              'field':'groupId',
+							              'label':'Nome',
+							              'standard':'true'
+							            }
+							        ]
+							     }"
+/></td> 
+			 		<td><input type="text" name="origem" id="origem" class="form-control"></td>
+			 		<td><input type="text" name="destino" id="destino" class="form-control"></td>
+			 		<td><input type="text" name="finalidade" id="finalidade" class="form-control"></td>
+			 	
+			 	</tr>
+			 </table>
+		</div>
+	</div>
+	
+	<!-- CAMPO CHECKBOX, SELEÇÃO DIAS DE VIAGEM  -->
+		<div class="row">
+			<div class="col-md-6 col-sm-6">
+				<label for="diasViagem">Selecione os dias de sua viagem</label>
+					<div class="checkbox">
+						<label><input type="checkbox" name="segunda" value="seg">Seg</label>
+						<label><input type="checkbox" name="terca" value="ter">Ter</label>
+						<label><input type="checkbox" name="quarta" value="qua">Qua</label>
+						<label><input type="checkbox" name="quinta" value="qui">Qui</label>
+						<label><input type="checkbox" name="sexta" value="sex">Sex</label>
+					</div>
+				</div>
+		</div>
+	
+    </div>
+</div>
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Dados Cambio</h3>
+    </div>
+    <div class="panel-body">
+        <!-- SELECT MOEDA DE CAMBIO -->
+	
+	<div class="row">
+		<div class="col-md-4">
+			<label for="moeda">Moeda</label>
+			<select class="form-control" name="moeda" id="moeda" dataset="ds_Moeda" datasetKey="moeda" datasetValue="simbolo">
+				</select>
+			</div>
+					<div class="col-md-4">
+					<label for="valor">Valor</label>
+					<input type="text" name="valor" id="valor" class="form-control">
+				</div>
+				
+			<div class="col-md-4">
+				<label for="pais">Pais</label>
+				<select class="form-control" id="pais" name="pais">
+					<option></option>
+					<option value="Brasil">Aprovadores Brasil</option>
+					<option value="Chile">Aprovadores Chile</option>
+					<option value="Argentina">Aprovadores Argentina</option>
+					<option value="EUA">Aprovadores EUA</option>
+				</select>
+				
+			</div>	
+		</div>
+    </div>
+</div>
+	
+	
+	
+	
+	
+	
+
+</form>
+</div>
+</body>
+</html>
